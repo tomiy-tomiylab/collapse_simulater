@@ -1,5 +1,6 @@
 import csv
 import numpy as np
+import datetime
 
 num_atoms = 100
 atoms = np.ones(num_atoms, dtype=np.int)
@@ -39,6 +40,16 @@ def is_end(array, rate):
     else:
         return False
 
+# Record Rarameters & Start msg
+with open('./reslt.csv', 'a') as f:
+    writer = csv.writer(f)
+    start_time = datetime.datetime.now()
+    nmsg = "Start: {}".format(start_time)
+    # pmsg = "{} %".format(cal_uncoll_rate(array))
+    # msg_row = np.hstack((nmsg, pmsg, array))
+    msg_row = np.hstack((nmsg, "apple"))
+    writer.writerow(msg_row)
+
 times = 1
 
 while True:
@@ -46,7 +57,7 @@ while True:
     for i in range(num_atoms):
 
         if atoms[i] == 1:
-            atoms[i] = collapse_prob(100)
+            atoms[i] = collapse_prob(50)
         else:
             pass
 
@@ -58,3 +69,11 @@ while True:
         break
     else:
         pass
+
+# Record End msg
+with open('./reslt.csv', 'a') as f:
+    writer = csv.writer(f)
+    end_time = datetime.datetime.now()
+    elapsed = end_time - start_time
+    end_msg = ["{}".format(elapsed)]
+    writer.writerow(end_msg)
