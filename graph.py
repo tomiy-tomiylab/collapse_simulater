@@ -4,8 +4,6 @@ import csv
 
 ax, fig = plt.subplots()
 
-fig.grid()
-
 x = np.array([])
 y = np.array([])
 
@@ -20,6 +18,8 @@ x = np.delete(x, length - 1)
 y = np.delete(y, length - 1)
 x = np.delete(x, 0)
 y = np.delete(y, 0)
+# x = np.flipud(x)
+# y = np.flipud(y)
 
 plt.plot(x, y, linewidth=1, color="red")
 plt.show()
