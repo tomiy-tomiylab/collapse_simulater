@@ -6,9 +6,9 @@ import datetime
 # "1"は不安定な原子、"0"は安定な原子で一度"1"が崩壊するとそれ以上は崩壊しない場合を想定
 # 例えば、"1"が"Cs137","0"が"Ba137"
 num_atoms = 100     # 原子の数[個]
-collapse_rate = 50  # 1judgeで崩壊する確率[‰] intで指定
+collapse_rate = 10  # 1judgeで崩壊する確率[‰] intで指定
 atoms = np.ones(num_atoms, dtype=np.int)  # 1で埋められた配列
-end_rate = 50       # 未崩壊の原子の割合がこの値を切るとシミュレーション停止 [%]
+end_rate = 3.175       # 未崩壊の原子の割合がこの値を切るとシミュレーション停止 [%]
 
 def log_result(array, time):
     # 結果を保存
