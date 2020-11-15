@@ -13,10 +13,11 @@ def log_result(array, time):
         writer.writerow(result_row)
 
 
-def prob_collapse():
+def prob_collapse(rate):
 
-    judg = np.random.choice([True, False], 1)
-    if judg:
+    nums = np.arange(1, 1001, dtype=np.int)
+    selected = np.random.choice(nums, 1)[0]
+    if selected >= rate:
         return 1
     else:
         return 0
@@ -45,7 +46,7 @@ while True:
     for i in range(length):
 
         if atoms[i] == 1:
-            atoms[i] = prob_collapse()
+            atoms[i] = prob_collapse(100)
         else:
             pass
 
@@ -53,7 +54,7 @@ while True:
 
     num_times += 1
 
-    if judg_end(atoms, 10):
+    if judg_end(atoms, 50):
         break
     else:
         pass
