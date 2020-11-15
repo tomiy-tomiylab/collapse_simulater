@@ -3,6 +3,7 @@ import numpy as np
 import datetime
 
 num_atoms = 100
+collapse_rate = 50
 atoms = np.ones(num_atoms, dtype=np.int)
 
 def log_result(array, time):
@@ -40,15 +41,15 @@ def is_end(array, rate):
     else:
         return False
 
-# Record Rarameters & Start msg
+# Record Rarameters & Begin msg
 with open('./reslt.csv', 'a') as f:
     writer = csv.writer(f)
     start_time = datetime.datetime.now()
-    nmsg = "Start: {}".format(start_time)
-    # pmsg = "{} %".format(cal_uncoll_rate(array))
-    # msg_row = np.hstack((nmsg, pmsg, array))
-    msg_row = np.hstack((nmsg, "apple"))
-    writer.writerow(msg_row)
+    stmsg = "Start: {}".format(start_time)
+    nmsg = "Atom: {}".format(num_atoms)
+    rmsg = "Collapse rate: {} ‰".format(collapse_rate)
+    begin_msg = np.hstack((stmsg, nmsg, rmsg))
+    writer.writerow(begin_msg)
 
 times = 1
 
@@ -57,7 +58,7 @@ while True:
     for i in range(num_atoms):
 
         if atoms[i] == 1:
-            atoms[i] = collapse_prob(50)
+            atoms[i] = collapse_prob(collapse_rate)
         else:
             pass
 
@@ -74,6 +75,8 @@ while True:
 with open('./reslt.csv', 'a') as f:
     writer = csv.writer(f)
     end_time = datetime.datetime.now()
+    etmsg = "End: {}".format(end_time)
     elapsed = end_time - start_time
-    end_msg = ["{}".format(elapsed)]
+    emsg = "Elapsed: {}".format(elapsed)
+    end_msg = np.hstack((etmsg, emsg))
     writer.writerow(end_msg)
