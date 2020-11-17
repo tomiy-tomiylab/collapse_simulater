@@ -21,12 +21,7 @@ with open('./to_graph.csv') as f:
 length = len(x)
 print(msg_f)
 print(msg_e)
-'''
-x = np.delete(x, length - 1)
-y = np.delete(y, length - 1)
-x = np.delete(x, 0)
-y = np.delete(y, 0)
-'''
+
 # x = np.flipud(x)
 # y = np.flipud(y)
 
