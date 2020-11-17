@@ -50,6 +50,7 @@ def is_end(array, rate):
         return False
 
 def cal_progress(max, now):
+    # 目標崩壊率(100 - end_rate)の何%崩壊したか計算
     return int(100 * now / max)
 
 # Record Rarameters & Begin msg
@@ -63,7 +64,7 @@ with open('./reslt.csv', 'a') as f:
     writer.writerow(begin_msg)
 
 class Progress():
-
+    # プログレスバーのオブジェクト
     def __init__(self, msg, total=100):
         self.bar = tqdm(total)
         self.bar.set_description(msg)
@@ -88,7 +89,7 @@ while True:
         else:
             pass
 
-    rate_a = cal_uncoll_rate(atoms)
+    rate_a = cal_uncoll_rate(atoms)  # 未崩壊率 
     progress_c.update(100 - rate_a)
     progress = cal_progress(100 - end_rate, 100 - rate_a)
     progress_p.update(progress)
