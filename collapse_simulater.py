@@ -1,6 +1,7 @@
 import csv
 import numpy as np
 import datetime
+from tqdm import tqdm
 
 # "1"を崩壊していない原子、"0"を崩壊した原子として扱う
 # "1"は不安定な原子、"0"は安定な原子で一度"1"が崩壊するとそれ以上は崩壊しない場合を想定
@@ -57,7 +58,20 @@ with open('./reslt.csv', 'a') as f:
     begin_msg = np.hstack((stmsg, nmsg, rmsg))
     writer.writerow(begin_msg)
 
+class Progress():
+
+    def __init__(self, msg, total=100):
+        self.bar = tqdm(total)
+        self.bar.set_description(msg)
+        self.last = 0
+
+    def update(self, now_rate):
+        update = now_rate - self.last
+        self.bar.update(update)
+        self.last = now_rate
+
 times = 1  # 何回目のjdgeか
+progress = Progress("Collapsed rate")
 
 while True:
 
@@ -67,6 +81,9 @@ while True:
             atoms[i] = collapse_prob(collapse_rate)
         else:
             pass
+
+    rate_a = cal_uncoll_rate(atoms)
+    progress.update(100 - rate_a)
 
     log_result(atoms, times)
 
