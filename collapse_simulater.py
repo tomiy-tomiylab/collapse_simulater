@@ -10,6 +10,7 @@ num_atoms = 10000     # 原子の数[個]
 collapse_rate = 2  # 1judgeで崩壊する確率[‰] intで指定
 atoms = np.ones(num_atoms, dtype=np.int)  # 1で埋められた配列
 end_rate = 3.175       # 未崩壊の原子の割合がこの値を切るとシミュレーション停止 [%]
+print("When collapsed rate over {}%, end.".format(100 - end_rate))
 
 def log_result(array, time):
     # 結果を保存
@@ -48,6 +49,9 @@ def is_end(array, rate):
     else:
         return False
 
+def cal_progress(max, now):
+    return int(100 * now / max)
+
 # Record Rarameters & Begin msg
 with open('./reslt.csv', 'a') as f:
     writer = csv.writer(f)
@@ -70,8 +74,10 @@ class Progress():
         self.bar.update(update)
         self.last = now_rate
 
+
 times = 1  # 何回目のjdgeか
-progress = Progress("Collapsed rate")
+progress_c = Progress("Collapsed rate")
+progress_p = Progress("Proogress rate")
 
 while True:
 
@@ -83,7 +89,9 @@ while True:
             pass
 
     rate_a = cal_uncoll_rate(atoms)
-    progress.update(100 - rate_a)
+    progress_c.update(100 - rate_a)
+    progress = cal_progress(100 - end_rate, 100 - rate_a)
+    progress_p.update(progress)
 
     log_result(atoms, times)
 
