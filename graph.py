@@ -4,14 +4,8 @@ import csv
 
 ax, fig = plt.subplots()
 
-# fig.set_ylim(0, 100)
-# start, end = fig.get_ylim()
-# stepsize = 25
-# fig.yaxis.set_ticks(pd.np.arange(start, end, stepsize))
-
 x = np.array([], dtype=np.int)
-y = np.array([], dtype=np.float32
-)
+y = np.array([], dtype=np.float32)
 
 with open('./to_graph.csv') as f:
     reader = csv.reader(f)
@@ -37,9 +31,6 @@ print("x max = {}".format(x[np.argmax(x)]))
 print("x min = {}".format(x[np.argmin(x)]))
 print("y max = {}".format(y[np.argmax(y)]))
 print("y min = {}".format(y[np.argmin(y)]))
-
-# x = np.flipud(x)
-# y = np.flipud(y)
 
 fig.plot(x, y, linewidth=1, color="red")
 plt.show()
