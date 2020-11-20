@@ -3,9 +3,11 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import csv
 
-font_name = 'Hiragino Sans'  # OSにインストールされているフォント名を指定
-# ex) Mac: Hiragino Sans
-#     Win: MS Gothic
+font_name = 'Noto Sans CJK JP'  # OSにインストールされているフォント名を指定
+#  各OSでの一例です 
+#  Mac: Hiragino Sans
+#  Win: MS Gothic
+#  Lin: Noto Sans CJK JP
 font_weight = 'medium'  # もし細ければ'bold'に変更
 ax, fig = plt.subplots()
 
