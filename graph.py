@@ -1,8 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import csv
 
+font_name = 'Hiragino Sans'  # OSにインストールされているフォント名を指定
+# ex) Mac: Hiragino Sans
+#     Win: MS Gothic
+font_weight = 'medium'  # もし細ければ'bold'に変更
 ax, fig = plt.subplots()
+
+# plt.grid()
+plt.grid(b=True, which='major', color='#666666', linestyle='-')
+plt.minorticks_on()
+plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+
+plt.title('放射性同位体の原子核数の時間変化', fontsize=15, fontname=font_name, fontweight=font_weight)
+plt.xlabel('時間', fontsize=15, fontname=font_name, fontweight=font_weight)
+plt.ylabel('崩壊せずに残っている原子の割合 [%]', fontsize=15, fontname=font_name,fontweight=font_weight)
 
 x = np.array([], dtype=np.int)
 y = np.array([], dtype=np.float32)
